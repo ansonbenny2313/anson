@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anson Benny — Visual Designer & UI/UX</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --bg2:#0f0f0f;
+  --bg3:#161616;
+  --card:#111;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.12);
+  --text:#f2ede6;
+  --muted:#666;
+  --muted2:#444;
+  --accent:#d4a96a;
+  --accent2:#b8864a;
+  --glow:rgba(212,169,106,0.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;overflow-x:hidden}
+.cursor{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,opacity 0.2s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(212,169,106,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,border-color 0.2s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 3.5rem;border-bottom:0.5px solid var(--border);background:rgba(8,8,8,0.85);backdrop-filter:blur(20px)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.06em;color:var(--text);text-decoration:none;text-transform:uppercase}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.7rem;color:var(--muted);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3.5rem 5.5rem;position:relative;overflow:hidden}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);font-family:'Syne',sans-serif;font-size:clamp(10rem,20vw,20rem);font-weight:800;color:rgba(255,255,255,0.016);letter-spacing:-0.05em;white-space:nowrap;user-select:none;line-height:1;z-index:0;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:1100px}
+.hero-status{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border:0.5px solid var(--border2);padding:0.4rem 1rem;border-radius:100px;margin-bottom:2.5rem}
+.hero-status-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;box-shadow:0 0 8px rgba(74,222,128,0.8);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(4.5rem,11vw,10rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--text)}
+h1.hero-name .ghost{display:block;color:transparent;-webkit-text-stroke:1px rgba(242,237,230,0.2)}
+.hero-bottom{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:flex-end;margin-top:3rem;padding-top:2.5rem;border-top:0.5px solid var(--border)}
+.hero-desc{font-size:0.975rem;color:var(--muted);font-weight:300;line-height:1.9;max-width:440px}
+.hero-desc em{color:var(--accent);font-style:normal;font-weight:400}
+.hero-cta{display:flex;gap:0.75rem}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 2rem;text-decoration:none;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;transition:all 0.2s;font-family:'Syne',sans-serif}
+.btn-fill{background:var(--accent);color:#080808;border:1px solid var(--accent)}
+.btn-fill:hover{background:#e6bb7e}
+.btn-outline{background:transparent;color:var(--muted);border:0.5px solid var(--border2)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.marquee-wrap{overflow:hidden;white-space:nowrap;padding:1rem 0;background:var(--bg2);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.marquee-track{display:inline-flex;animation:scroll 22s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mi{font-family:'Syne',sans-serif;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted2);padding:0 2rem;flex-shrink:0}
+.mi b{color:var(--accent);font-weight:400}
+.section{padding:7rem 3.5rem;max-width:1180px;margin:0 auto}
+.stitle{margin-bottom:4rem;padding-bottom:1.75rem;border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end}
+.slabel{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.6rem;font-family:'Syne',sans-serif}
+h2{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;line-height:1.0;letter-spacing:-0.025em;color:var(--text)}
+h2 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(242,237,230,0.25)}
+.scount{font-family:'Syne',sans-serif;font-size:clamp(3rem,6vw,5rem);font-weight:800;color:var(--border2);letter-spacing:-0.05em;line-height:1;user-select:none}
+.works-list{display:flex;flex-direction:column}
+.wi{display:grid;grid-template-columns:48px 1fr 140px;gap:2.5rem;align-items:start;padding:2.25rem 0;border-bottom:0.5px solid var(--border);position:relative;transition:background 0.25s}
+.wi::before{content:'';position:absolute;left:-3.5rem;right:-3.5rem;top:0;bottom:0;background:var(--glow);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.wi:hover::before{opacity:1}
+.wi:first-child{border-top:0.5px solid var(--border)}
+.wnum{font-family:'Syne',sans-serif;font-size:0.65rem;letter-spacing:0.06em;color:var(--muted2);padding-top:0.25rem;font-weight:600}
+.wtags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.8rem}
+.wtag{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border:0.5px solid var(--border2);color:var(--muted2);font-weight:500}
+.wtitle{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-bottom:0.6rem}
+.wdesc{font-size:0.87rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:600px}
+.wlinks{display:flex;flex-direction:column;gap:0.6rem;align-items:flex-end;padding-top:0.2rem;position:relative;z-index:1}
+.wlink{display:inline-flex;align-items:center;gap:0.45rem;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--muted2);border-bottom:0.5px solid var(--muted2);padding-bottom:0.1rem;transition:color 0.2s,border-color 0.2s;font-family:'Syne',sans-serif;font-weight:600}
+.wlink:hover{color:var(--accent);border-color:var(--accent)}
+.wlink svg{width:10px;height:10px}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);border:0.5px solid var(--border)}
+.sk{padding:1.75rem 1.5rem;border-right:0.5px solid var(--border);border-bottom:0.5px solid var(--border);transition:background 0.2s}
+.sk:hover{background:var(--bg3)}
+.sk:nth-child(4n){border-right:none}
+.sk:nth-last-child(-n+4){border-bottom:none}
+.skicon{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:0.8rem;letter-spacing:-0.02em}
+.skname{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.4rem}
+.skdet{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.65}
+.about-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:5rem;align-items:start}
+.about-lead{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:700;line-height:1.5;color:var(--text);margin-bottom:2rem;letter-spacing:-0.01em}
+.about-lead em{color:var(--accent);font-style:normal}
+.about-body p{font-size:0.9rem;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:1rem}
+.ab{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:0.5px solid var(--border)}
+.ab:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ablabel{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.85rem;font-family:'Syne',sans-serif;font-weight:600}
+.pills{display:flex;flex-wrap:wrap;gap:0.35rem}
+.pill{font-size:0.73rem;padding:0.22rem 0.65rem;border:0.5px solid var(--border2);color:var(--muted);border-radius:100px}
+.exp-list{display:flex;flex-direction:column}
+.erow{display:grid;grid-template-columns:150px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:0.5px solid var(--border)}
+.erow:first-child{border-top:0.5px solid var(--border)}
+.emeta{}
+.eyear{font-size:0.7rem;letter-spacing:0.04em;color:var(--muted);font-weight:300;margin-bottom:0.5rem;line-height:1.6}
+.emark{width:5px;height:5px;background:var(--muted2);border-radius:50%;transition:background 0.3s;margin-top:0.3rem}
+.erow:hover .emark{background:var(--accent)}
+.erole{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.3rem;letter-spacing:-0.01em}
+.eorg{font-size:0.78rem;color:var(--accent);margin-bottom:1rem;font-weight:400}
+.edesc{font-size:0.87rem;color:var(--muted);line-height:1.85;font-weight:300}
+.edesc li{list-style:none;position:relative;padding-left:1.25rem;margin-bottom:0.45rem}
+.edesc li::before{content:'—';position:absolute;left:0;color:var(--muted2)}
+.mission-wrap{border:0.5px solid var(--border2);background:var(--bg2);overflow:hidden;position:relative}
+.mission-wrap::after{content:'JYFT 31';position:absolute;right:-2rem;bottom:-1.5rem;font-family:'Syne',sans-serif;font-size:8rem;font-weight:800;color:rgba(212,169,106,0.035);letter-spacing:0.1em;user-select:none;white-space:nowrap;pointer-events:none;line-height:1}
+.mission-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 3.5rem}
+.mbadge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;border:0.5px solid rgba(212,169,106,0.35);color:var(--accent);padding:0.35rem 0.85rem;margin-bottom:1.25rem;font-weight:600;font-family:'Syne',sans-serif}
+.mtitle{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:0.4rem;letter-spacing:-0.025em}
+.msub{font-size:0.82rem;color:var(--accent);margin-bottom:1.25rem;font-weight:400}
+.mbody{font-size:0.88rem;color:var(--muted);line-height:1.9;font-weight:300}
+.mlink{display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--accent);border-bottom:0.5px solid rgba(212,169,106,0.35);padding-bottom:0.15rem;font-family:'Syne',sans-serif;font-weight:700;transition:border-color 0.2s}
+.mlink:hover{border-color:var(--accent)}
+.mlink svg{width:11px;height:11px}
+.mstats{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:0.5px solid var(--border)}
+.mst{padding:1.5rem;background:var(--bg3);text-align:center;border:0.5px solid var(--border)}
+.mst-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+.mst-l{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:0.35rem;font-weight:500}
+#contact{padding:7rem 3.5rem 5rem;max-width:1180px;margin:0 auto;text-align:center}
+.cbig{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:800;letter-spacing:-0.04em;line-height:0.9;color:var(--text)}
+.cbig em{color:transparent;-webkit-text-stroke:1px rgba(242,237,230,0.22);font-style:normal}
+.csub{font-size:0.975rem;color:var(--muted);font-weight:300;margin:1.75rem auto 3rem;max-width:400px;line-height:1.85}
+.cbtns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.cbtn{display:inline-flex;align-items:center;gap:0.6rem;padding:1rem 2.2rem;text-decoration:none;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;font-family:'Syne',sans-serif;transition:all 0.2s}
+.cbtn-main{background:var(--accent);color:#080808;border:1px solid var(--accent)}
+.cbtn-main:hover{background:#e6bb7e}
+.cbtn-ghost{background:transparent;color:var(--muted);border:0.5px solid var(--border2)}
+.cbtn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.clinks{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.clink{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted2);text-decoration:none;font-weight:500;transition:color 0.2s}
+.clink:hover{color:var(--accent)}
+footer{border-top:0.5px solid var(--border);padding:1.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;color:var(--muted2);letter-spacing:0.04em}
+footer a{color:var(--muted2);text-decoration:none;transition:color 0.2s}
+footer a:hover{color:var(--accent)}
+hr.div{border:none;border-top:0.5px solid var(--border)}
+.fade{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+.fade.in{opacity:1;transform:translateY(0)}
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links a{font-size:0.62rem}
+  .nav-links{gap:1.5rem}
+  #hero{padding:0 1.5rem 4rem}
+  .hero-bottom{grid-template-columns:1fr;gap:2rem}
+  .hero-cta{flex-wrap:wrap}
+  .section{padding:5rem 1.5rem}
+  .wi{grid-template-columns:36px 1fr;gap:1.5rem}
+  .wlinks{display:none}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .sk:nth-child(4n){border-right:0.5px solid var(--border)}
+  .sk:nth-child(2n){border-right:none}
+  .sk:nth-last-child(-n+4){border-bottom:0.5px solid var(--border)}
+  .sk:nth-last-child(-n+2){border-bottom:none}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .erow{grid-template-columns:1fr;gap:0.5rem}
+  .mission-inner{grid-template-columns:1fr;padding:2rem 1.5rem}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">Anson<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#works">Works</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-text" aria-hidden="true">DESIGN</div>
+  <div class="hero-content">
+    <div class="hero-status">
+      <span class="hero-status-dot"></span>
+      Available for design roles
+    </div>
+    <h1 class="hero-name">
+      Anson
+      <span class="ghost">Benny</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        Computer Science Engineer, Passionate Visual Designer &amp; UI/UX Creative — crafting <em>brand identities that move people</em>,
+        interfaces that breathe, and digital creatives that convert.
+        Adobe Suite · Figma · Brand Design · Digital Content.
+      </p>
+      <div class="hero-cta">
+        <a href="#works" class="btn btn-fill">View Work</a>
+        <a href="mailto:ansonbenny2312@gmail.com" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mi"><b>✦</b> Visual Design</span><span class="mi"><b>✦</b> Brand Identity</span><span class="mi"><b>✦</b> UI/UX</span><span class="mi"><b>✦</b> Adobe Photoshop</span><span class="mi"><b>✦</b> Illustrator</span><span class="mi"><b>✦</b> Figma</span><span class="mi"><b>✦</b> Event Branding</span><span class="mi"><b>✦</b> Social Media</span><span class="mi"><b>✦</b> Print Design</span><span class="mi"><b>✦</b> Typography</span><span class="mi"><b>✦</b> Colour Theory</span>
+    <span class="mi"><b>✦</b> Visual Design</span><span class="mi"><b>✦</b> Brand Identity</span><span class="mi"><b>✦</b> UI/UX</span><span class="mi"><b>✦</b> Adobe Photoshop</span><span class="mi"><b>✦</b> Illustrator</span><span class="mi"><b>✦</b> Figma</span><span class="mi"><b>✦</b> Event Branding</span><span class="mi"><b>✦</b> Social Media</span><span class="mi"><b>✦</b> Print Design</span><span class="mi"><b>✦</b> Typography</span><span class="mi"><b>✦</b> Colour Theory</span>
+  </div>
+</div>
+
+<div class="section" id="works">
+  <div class="stitle">
+    <div><div class="slabel">Selected Works</div><h2>What I've<br><em>created</em></h2></div>
+    <div class="scount">04</div>
+  </div>
+  <div class="works-list">
+
+    <div class="wi fade">
+      <div class="wnum">01</div>
+      <div>
+        <div class="wtags"><span class="wtag">Event Branding</span><span class="wtag">Visual Identity</span><span class="wtag">Print</span></div>
+        <div class="wtitle">TEDxAJCE — Full Event Identity</div>
+        <div class="wdesc">Worked as the media lead for TEDxAJCE. Conceptualised the visual theme, designed speaker cards, stage graphics, banners, UI for TedxAjce page, social media assets, and post-event content — full creative control from brief to final delivery.</div>
+      </div>
+      <div class="wlinks">
+        <a href="https://www.tedxajce.in/" class="wlink" target="_blank" rel="noopener">TedxAjce Website <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+        <a href="https://youtu.be/XcKDlMRNlCU?si=g1zO-5oBshia1Z_q" class="wlink" target="_blank" rel="noopener">Watch Video <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+      </div>
+    </div>
+    <div class="wi fade">
+      <div class="wnum">02</div>
+      <div>
+        <div class="wtags"><span class="wtag">Designing</span><span class="wtag">Branding</span><span class="wtag">Printing</span></div>
+        <div class="wtitle">Jesus Youth</div>
+        <div class="wdesc">As a Volunteer for Jesus Youth, I was responsible for designing for various programmes such as Jaago, Living Waters and much more. These were designed using adobe photoshop and illustrator.</div>
+      </div>
+      <div class="wlinks">
+        <a href="https://drive.google.com/drive/folders/1EqSF6VY055WebCok9_MZN5_JYjJ_OB5s?usp=drive_link" class="wlink" target="_blank" rel="noopener">Jaago Design Materials <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+        <a href="https://drive.google.com/drive/folders/1LIQKDiPqomGcj8MzI5sZ7Q84SZY5_8x2?usp=sharing" class="wlink" target="_blank" rel="noopener">ID cards Living Waters <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+      </div>
+    </div>
+
+    <div class="wi fade">
+      <div class="wnum">02</div>
+      <div>
+        <div class="wtags"><span class="wtag">UI/UX</span><span class="wtag">Figma</span><span class="wtag">Wireframing</span></div>
+        <div class="wtitle">UI/UX Projects — Interfaces &amp; Prototypes</div>
+        <div class="wdesc">Wireframing, user flows, mockup design, and information architecture built in Figma. Focus on usability, visual hierarchy, and clean interaction design. Add your Figma prototype or case study link here.</div>
+      </div>
+      <div class="wlinks">
+        <a href="https://www.figma.com/design/gZeTkd65MIsHrDP6vGspCy/APP-UI?node-id=0-1&t=UfYOZjXTaZwAHUUd-1" class="wlink" target="_blank" rel="noopener">Marketocity Project UI/UX <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+        <a href="https://www.figma.com/design/Q1uk7GprlHr38ejRatTgDA/LIVEZZ?node-id=0-1&t=COPUuK1x0KdrkTOq-1" class="wlink" target="_blank" rel="noopener">Lives App UI <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+      </div>
+    </div>
+    <div class="wi fade">
+      <div class="wnum">03</div>
+      <div>
+        <div class="wtags"><span class="wtag">Missionary Work</span><span class="wtag">Fulltimers Project</span></div>
+        <div class="wtitle">Jesus Youth Fulltime Volunteer Journey</div>
+        <div class="wdesc">A journey where we met the Lord. Each and every frame has a Story to tell. The visuals are shot, edited and graded by me using Adobe Premiere Pro. Title Animation done using Adobe After Effects</div>
+      </div>
+      <div class="wlinks">
+        
+        <a href="https://youtu.be/R_0y212x2K8?si=WeyzOMGQuadp-pv1" class="wlink" target="_blank" rel="noopener">Watch Video <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+      </div>
+    </div>
+  
+    <div class="wi fade">
+      <div class="wnum">04</div>
+      <div>
+        <div class="wtags"><span class="wtag">Client Work</span><span class="wtag">Digital Creatives</span><span class="wtag">Marketing</span></div>
+        <div class="wtitle">Riverrises Technologies — Client Creatives</div>
+        <div class="wdesc">Designed digital creatives, promotional materials, and content assets under real client briefs. Maintained brand consistency across all deliverables within fast-paced production timelines.</div>
+      </div>
+      <div class="wlinks">
+        <a href="https://drive.google.com/drive/folders/1y7N5hTDnNWTsbPzZTumrXtJh_nYSIrP2?usp=drive_link" class="wlink" target="_blank" rel="noopener">Work Samples <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+      </div>
+    </div>
+
+    
+
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section" id="skills">
+  <div class="stitle">
+    <div><div class="slabel">Capabilities</div><h2>Tools &amp;<br><em>skills</em></h2></div>
+  </div>
+  <div class="skills-grid">
+    <div class="sk fade"><div class="skicon">Ps</div><div class="skname">Photoshop</div><div class="skdet">Retouching, compositing, digital art, layer masking — Udemy Advanced Certified</div></div>
+    <div class="sk fade"><div class="skicon">Ai</div><div class="skname">Illustrator</div><div class="skdet">Vector graphics, icon design, illustration, brand mark creation, scalable assets</div></div>
+    <div class="sk fade"><div class="skicon">Fg</div><div class="skname">Figma</div><div class="skdet">Wireframing, user flows, prototyping, interactive mockups, design system components</div></div>
+    <div class="sk fade"><div class="skicon">◈</div><div class="skname">Brand Identity</div><div class="skdet">Visual identity systems, typography, colour palettes, brand guidelines, style guides</div></div>
+    <div class="sk fade"><div class="skicon">▦</div><div class="skname">Layout &amp; Print</div><div class="skdet">Posters, banners, flyers, event collateral, editorial layout, print-ready files</div></div>
+    <div class="sk fade"><div class="skicon">⬡</div><div class="skname">Social Media</div><div class="skdet">Campaign assets, carousels, reel thumbnails, stories, platform-optimised formats</div></div>
+    <div class="sk fade"><div class="skicon">↗</div><div class="skname">UI/UX Principles</div><div class="skdet">Usability, information architecture, interaction design, user-centred thinking</div></div>
+    <div class="sk fade"><div class="skicon">&lt;/&gt;</div><div class="skname">Dev Awareness</div><div class="skdet">HTML &amp; CSS — understands design-to-dev handoff and implementation constraints</div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section" id="about">
+  <div class="stitle">
+    <div><div class="slabel">About</div><h2>The person<br><em>behind the work</em></h2></div>
+  </div>
+  <div class="about-grid fade">
+    <div class="about-body">
+      <p class="about-lead">I'm Anson Benny— a visual designer who believes <em>design is storytelling</em>. Every pixel, typeface, and colour should have a reason.</p>
+      <p>I led creative operations for Jesus Youth, IEEE and TEDxAJCE simultaneously for two years — managing everything from event identity systems to last-minute social media posts. That pressure taught me how to think fast, maintain quality, and collaborate without losing the thread of the design.</p>
+      <p>My internship at Riverrises Technologies added real client experience — working under live briefs, tight deadlines, and brand consistency requirements. I know how the handoff works, and I've lived the full creative pipeline from brief to published asset.</p>
+      <p>Outside design, my time as a Jesus Youth full-timer sharpened how I work with people — with patience, purpose, and genuine care for the outcome. Not just delivering, but delivering well.</p>
+    </div>
+    <div>
+      <div class="ab"><div class="ablabel">Design Tools</div><div class="pills"><span class="pill">Adobe Photoshop</span><span class="pill">Illustrator</span><span class="pill">Figma</span><span class="pill">HTML &amp; CSS</span></div></div>
+      <div class="ab"><div class="ablabel">Disciplines</div><div class="pills"><span class="pill">Visual Design</span><span class="pill">Brand Identity</span><span class="pill">UI/UX</span><span class="pill">Typography</span><span class="pill">Colour Theory</span><span class="pill">Print Design</span><span class="pill">Social Media Design</span><span class="pill">Wireframing</span></div></div>
+      <div class="ab"><div class="ablabel">Certifications</div><div class="pills"><span class="pill">Photoshop Advanced — Udemy</span><span class="pill">ISEA Phase III — MNIT Jaipur</span></div></div>
+      <div class="ab"><div class="ablabel">Current Status</div><div class="pills"><span class="pill">M.Tech @ VIT Bhopal</span><span class="pill">Open to Design Roles</span><span class="pill">Available Now</span></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section" id="experience">
+  <div class="stitle">
+    <div><div class="slabel">Experience</div><h2>Where I've<br><em>led &amp; delivered</em></h2></div>
+    <div class="scount">04</div>
+  </div>
+  <div class="exp-list">
+
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2021 – 2023</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">Design Lead &amp; Office Bearer</div>
+        <div class="eorg">IEEE &amp; TEDxAJCE Student Chapters · Kanjirappally, Kerala</div>
+        <ul class="edesc">
+          <li>Led all visual design operations for two student communities simultaneously — event branding, promotional graphics, social media, and print from concept to delivery.</li>
+          <li>Directed TEDxAJCE design end-to-end: visual themes, speaker cards, stage graphics, banners, and post-event content with full creative ownership.</li>
+          <li>Translated event visions into cohesive identities, working closely with committees and external stakeholders under live event timelines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2021</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">Intern — Graphic Design &amp; Content Creation</div>
+        <div class="eorg">Riverrises Technologies</div>
+        <ul class="edesc">
+          <li>Designed digital creatives, promotional materials, and content assets for client marketing campaigns under real briefs.</li>
+          <li>Delivered visual content within deadlines while maintaining brand consistency — hands-on experience of full design-to-delivery workflows.</li>
+          <li>Collaborated with cross-functional teams, developing skills in briefing, iteration, and client communication.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2023 – 2024</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">Full-Time Volunteer</div>
+        <div class="eorg">Jesus Youth Pro-Life India</div>
+        <ul class="edesc">
+          <li>Committed one full year to full-time missionary volunteering — part of JYFT Batch 31, Jesus Youth's year-long formation and mission programme present in 40+ countries.</li>
+          <li>Participated in outreach, event coordination, community formation, and volunteer leadership across multiple programmes and regions.</li>
+          <li>Built strong interpersonal, team management, and cross-cultural communication skills through sustained ground-level service.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2020 – 2022</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">Regional Coordinator &amp; Volunteer Secretary</div>
+        <div class="eorg">National Service Scheme (NSS)</div>
+        <ul class="edesc">
+          <li>Coordinated NSS activities across multiple chapters at a regional level — managing volunteers, events, and stakeholder communication.</li>
+          <li>Developed large-scale project management and leadership capabilities across a diverse volunteer network.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section" id="mission">
+  <div class="stitle">
+    <div><div class="slabel">Service &amp; Mission</div><h2>Jesus Youth<br><em>Journey</em></h2></div>
+  </div>
+  <div class="mission-wrap fade">
+    <div class="mission-inner">
+      <div>
+        <div class="mbadge">✦ JYFT Batch 31 · Full-Time Mission</div>
+        <div class="mtitle">One Year.<br>Full Commitment.</div>
+        <div class="msub">Jesus Youth Full-Time Programme — Batch 31</div>
+        <div class="mbody">
+          I served as a full-time volunteer with the Jesus Youth movement through JYFT (Jesus Youth Full-Time) — a year-long formation and mission programme for graduates, recognised by the Holy See and active in over 40 countries.
+          <br><br>
+          This wasn't a side commitment. It was a full year of outreach, community formation, event organisation, and volunteer leadership — across multiple programmes, regions, and people. It shaped how I work: with purpose, consistency, and genuine care for the people I serve alongside.
+        </div>
+        <a href="https://jesusyouth.org/volunteership.php" class="mlink" target="_blank" rel="noopener">
+          Learn about JYFT Mission
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg>
+        </a>
+      </div>
+      <div class="mstats">
+        <div class="mst"><div class="mst-n">1+</div><div class="mst-l">Year Full-Time</div></div>
+        <div class="mst"><div class="mst-n">40+</div><div class="mst-l">Countries, JY Present</div></div>
+        <div class="mst"><div class="mst-n">31</div><div class="mst-l">JYFT Batch</div></div>
+        <div class="mst"><div class="mst-n">∞</div><div class="mst-l">Community Built</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section" id="education">
+  <div class="stitle">
+    <div><div class="slabel">Education</div><h2>Academic<br><em>background</em></h2></div>
+  </div>
+  <div class="exp-list">
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2025 – Present</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">M.Tech — Cyber Security &amp; Digital Forensics</div>
+        <div class="eorg">Vellore Institute of Technology</div>
+        <div class="edesc" style="padding:0;list-style:none">Technical depth behind the creative — structured, analytical thinking applied to every design problem.</div>
+      </div>
+    </div>
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2019 – 2023</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">B.Tech — Computer Science &amp; Engineering</div>
+        <div class="eorg">Amal Jyothi College of Engineering · Kanjirappally, Kerala</div>
+        <div class="edesc" style="padding:0;list-style:none">CGPA 8.2 / 10 · Design Lead for IEEE &amp; TEDxAJCE throughout undergraduate years.</div>
+      </div>
+    </div>
+    <div class="erow fade">
+      <div class="emeta"><div class="eyear">2017 – 2019</div><div class="emark"></div></div>
+      <div>
+        <div class="erole">Class XII &amp; Class X</div>
+        <div class="eorg">Montfort School Anakkara · Kerala</div>
+        <div class="edesc" style="padding:0;list-style:none">Class XII: 83% &nbsp;·&nbsp; Class X: CGPA 9.8</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<section id="contact">
+  <div class="slabel" style="display:flex;justify-content:center;margin-bottom:1.25rem">Let's work together</div>
+  <div class="cbig">Open to<br><em>opportunities</em></div>
+  <p class="csub">Available for design roles, freelance projects, and creative collaborations. Let's make something worth seeing.</p>
+  <div class="cbtns">
+    <a href="mailto:ansonbenny2312@gmail.com" class="cbtn cbtn-main">Send me an email <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2V7"/></svg></a>
+    <a href="https://linkedin.com/in/ansonbenny" class="cbtn cbtn-ghost" target="_blank" rel="noopener">Connect on LinkedIn</a>
+  </div>
+  <div class="clinks">
+    <a href="tel:+919633470233" class="clink">+91 96334 70233</a>
+    <a href="https://github.com/ansonbenny2313" class="clink" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/ansonbenny" class="clink" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Anson Benny</span>
+  <a href="mailto:ansonbenny2312@gmail.com">ansonbenny2312@gmail.com</a>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(212,169,106,0.7)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(212,169,106,0.4)';});
+});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.1});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
